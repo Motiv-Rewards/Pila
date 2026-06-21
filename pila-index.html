@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PILA — Your Pilates, Celebrated</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PILA">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* PILA palette — soft studio warmth meets editorial luxury */
+  --void:#0d0d0b;
+  --void2:#1a1a17;
+  --void3:#252520;
+  --chalk:#faf8f3;
+  --chalk2:#f0ece3;
+  --chalk3:#e3ddd2;
+  --dust:#b8b09e;
+  --dust2:#8a8278;
+  --blush:#e8b4a0;
+  --blush2:#d4896e;
+  --blush3:#c06845;
+  --sage:#7a9e87;
+  --sage2:#5a8269;
+  --cream:#f7f0e6;
+  --bd:rgba(13,13,11,0.08);
+  --bds:rgba(13,13,11,0.04);
+  --bdd:rgba(250,248,243,0.08);
+  --r:20px;--rs:12px;
+  --sh:0 2px 20px rgba(13,13,11,0.07);
+  --sh-lg:0 12px 48px rgba(13,13,11,0.14);
+}
+html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--chalk);color:var(--void);-webkit-font-smoothing:antialiased;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden}
+button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
+input,select,textarea{font-family:'DM Sans',sans-serif;outline:none}
+.serif{font-family:'Bodoni Moda',serif}
+img{max-width:100%;display:block}
+.screen{display:none}.screen.on{display:block}
+.tp{display:none;padding-bottom:96px}.tp.on{display:block}
+
+/* ── ONBOARDING ── */
+.ob{min-height:100vh;background:var(--void);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.ob-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:0}
+.ob-glow{position:absolute;top:-20%;left:-20%;width:140%;height:80%;background:radial-gradient(ellipse at 40% 60%,rgba(232,180,160,0.08) 0%,transparent 60%);pointer-events:none;z-index:0}
+.ob-c{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;padding:max(64px,env(safe-area-inset-top)) 32px 48px}
+
+.ob-wordmark{font-family:'Bodoni Moda',serif;font-size:42px;font-weight:400;letter-spacing:0.08em;color:var(--chalk);margin-bottom:auto;line-height:1}
+.ob-wordmark span{color:var(--blush);font-style:italic}
+
+.ob-hero{margin:auto 0 52px}
+.ob-pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(232,180,160,0.7);border:0.5px solid rgba(232,180,160,0.25);border-radius:100px;padding:5px 14px;margin-bottom:24px}
+.ob-h{font-family:'Bodoni Moda',serif;font-size:52px;font-weight:400;color:var(--chalk);line-height:1.05;margin-bottom:20px;letter-spacing:-0.01em}
+.ob-h em{font-style:italic;color:var(--blush)}
+.ob-sub{font-size:15px;color:rgba(250,248,243,0.38);line-height:1.75;font-weight:300;max-width:280px}
+
+.ob-acts{display:flex;flex-direction:column;gap:12px}
+.ob-cta{background:var(--blush);color:var(--void);padding:17px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:0.02em;transition:all .2s}
+.ob-cta:active{transform:scale(.98);background:var(--blush2)}
+.ob-ghost{background:rgba(250,248,243,0.06);color:rgba(250,248,243,0.75);padding:17px;border-radius:14px;font-size:15px;border:0.5px solid rgba(250,248,243,0.1)}
+.ob-ghost:active{transform:scale(.98)}
+.ob-foot{text-align:center;margin-top:16px;font-size:12px;color:rgba(250,248,243,0.2)}
+.ob-foot a{color:rgba(232,180,160,0.6);cursor:pointer}
+
+/* ── AUTH SHEET ── */
+.sh-bg{position:fixed;inset:0;z-index:200;display:none;align-items:flex-end}
+.sh-bg.on{display:flex}
+.sh-ov{position:absolute;inset:0;background:rgba(13,13,11,0.7);backdrop-filter:blur(8px)}
+.sh{background:var(--chalk);border-radius:28px 28px 0 0;padding:28px 28px max(40px,env(safe-area-inset-bottom));width:100%;position:relative;z-index:1;transform:translateY(100%);transition:transform .42s cubic-bezier(.4,0,.2,1);max-height:92vh;overflow-y:auto}
+.sh-bg.on .sh{transform:translateY(0)}
+.sh-hdl{width:40px;height:4px;background:var(--chalk3);border-radius:2px;margin:0 auto 24px}
+.sh-ti{font-family:'Bodoni Moda',serif;font-size:30px;font-weight:400;margin-bottom:5px}
+.sh-sub{font-size:13px;color:var(--dust2);margin-bottom:22px}
+.fld{margin-bottom:13px}
+.fld label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dust2);margin-bottom:5px;font-weight:600}
+.fld input{width:100%;padding:13px 15px;border:.5px solid var(--bd);border-radius:var(--rs);font-size:15px;background:var(--chalk2);color:var(--void);transition:border-color .2s,background .2s}
+.fld input:focus{border-color:var(--blush);background:#fff}
+.btn-dark{width:100%;background:var(--void);color:var(--chalk);padding:15px;border-radius:var(--rs);font-size:15px;font-weight:600;letter-spacing:.02em;transition:all .2s;margin-top:6px}
+.btn-dark:active{transform:scale(.98)}
+.auth-err{color:#c0392b;font-size:12px;text-align:center;margin-top:9px;min-height:16px}
+.auth-sw{text-align:center;margin-top:14px;font-size:13px;color:var(--dust2)}
+.auth-sw a{color:var(--blush2);cursor:pointer;font-weight:600}
+
+/* ── APP SHELL ── */
+.app-hdr{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.93);backdrop-filter:blur(20px);border-bottom:.5px solid var(--bd);min-height:58px;padding:max(14px,env(safe-area-inset-top)) 20px 14px;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo{font-family:'Bodoni Moda',serif;font-size:22px;font-weight:400;letter-spacing:0.06em;color:var(--void)}
+.hdr-logo em{color:var(--blush2);font-style:italic}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.hdr-streak{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--void2);background:var(--chalk2);padding:5px 12px;border-radius:100px;border:.5px solid var(--bd)}
+.hdr-pts{background:var(--void);color:var(--chalk);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600}
+.btm-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(250,248,243,0.96);backdrop-filter:blur(20px);border-top:.5px solid var(--bd);display:flex;padding:10px 0 max(14px,env(safe-area-inset-bottom));z-index:100}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;background:none;color:var(--dust);transition:color .2s;position:relative}
+.nb.on{color:var(--void)}
+.nb-ic{font-size:20px;line-height:1}
+.nb-lb{font-size:8px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.nb-dot{width:4px;height:4px;border-radius:50%;background:var(--blush2);opacity:0;margin-top:1px;transition:opacity .2s}
+.nb.on .nb-dot{opacity:1}
+.nb-badge{position:absolute;top:0;right:18%;background:var(--blush2);color:#fff;border-radius:50%;width:14px;height:14px;font-size:8px;font-weight:700;display:none;align-items:center;justify-content:center}
+.nb-badge.on{display:flex}
+.sec{padding:0 20px 24px}
+.ey{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dust);margin-bottom:12px;display:flex;align-items:center;gap:9px;font-weight:600}
+.ey::after{content:'';flex:1;height:.5px;background:var(--bd)}
+
+/* ── HOME ── */
+.home-hero{padding:28px 24px 20px}
+.home-greet{font-size:11px;color:var(--dust);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;font-weight:600}
+.home-name{font-family:'Bodoni Moda',serif;font-size:40px;font-weight:400;line-height:1.1}
+.home-name em{font-style:italic;color:var(--blush2)}
+
+/* RING CARD */
+.ring-card{background:#fff;border-radius:24px;margin:0 16px 14px;padding:24px 20px;box-shadow:var(--sh);border:.5px solid var(--bd)}
+.ring-wrap{position:relative;width:150px;height:150px;margin:0 auto 18px}
+.ring-svg{width:150px;height:150px;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:var(--chalk2);stroke-width:10}
+.ring-fill{fill:none;stroke:url(#pinkGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)}
+.ring-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-n{font-family:'Bodoni Moda',serif;font-size:40px;font-weight:400;line-height:1}
+.ring-l{font-size:10px;color:var(--dust);letter-spacing:.1em;text-transform:uppercase;margin-top:1px;font-weight:600}
+.ring-nx{font-size:11px;color:var(--blush2);font-weight:600;margin-top:2px}
+.ring-stats{display:flex;justify-content:space-around;border-top:.5px solid var(--chalk2);padding-top:14px}
+.rs{text-align:center}
+.rs-n{font-family:'Bodoni Moda',serif;font-size:22px;font-weight:400}
+.rs-l{font-size:10px;color:var(--dust);letter-spacing:.04em;font-weight:500;margin-top:1px}
+
+/* STREAK CALENDAR */
+.cal-card{background:var(--void);border-radius:22px;margin:0 16px 14px;padding:20px;box-shadow:var(--sh-lg)}
+.cal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.cal-title{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,248,243,0.4);font-weight:600}
+.cal-month{font-size:11px;color:rgba(250,248,243,0.25);font-weight:500}
+.cal-streak-txt{font-family:'Bodoni Moda',serif;font-size:24px;font-weight:400;color:var(--chalk);margin-bottom:16px}
+.cal-streak-txt em{color:var(--blush);font-style:normal}
+.cal-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:5px}
+.cal-lbl{font-size:8px;color:rgba(250,248,243,0.2);text-align:center;font-weight:600;letter-spacing:.05em}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cd{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(250,248,243,0.2);background:rgba(250,248,243,0.04);font-weight:500}
+.cd.went{background:rgba(232,180,160,0.18);color:var(--blush)}
+.cd.fire{background:rgba(232,180,160,0.22);font-size:13px}
+.cd.today{outline:1px solid rgba(232,180,160,0.4);outline-offset:-1px}
+.cal-legend{display:flex;gap:14px;margin-top:10px}
+.cal-leg{display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(250,248,243,0.3)}
+.cal-leg-ic{width:10px;height:10px;border-radius:3px}
+
+/* MOOD */
+.mood-card{background:#fff;border-radius:20px;margin:0 16px 14px;padding:18px;box-shadow:var(--sh);border:.5px solid var(--bd)}
+.mood-q{font-size:14px;font-weight:600;margin-bottom:3px}
+.mood-qs{font-size:12px;color:var(--dust);margin-bottom:12px}
+.mood-row{display:flex;gap:6px}
+.mopt{flex:1;background:var(--chalk2);border:1.5px solid transparent;border-radius:10px;padding:9px 3px;text-align:center;transition:all .2s}
+.mopt.sel{background:var(--void);border-color:var(--void)}
+.mopt-em{font-size:18px;display:block;margin-bottom:2px}
+.mopt-lb{font-size:8px;color:var(--dust);font-weight:600;letter-spacing:.04em}
+.mopt.sel .mopt-lb{color:var(--blush)}
+
+/* ACTIVITY */
+.act-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:.5px solid var(--bds)}
+.act-row:last-child{border-bottom:none}
+.act-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+/* ── FEED ── */
+.feed-post{background:#fff;border-radius:20px;margin-bottom:12px;overflow:hidden;box-shadow:var(--sh);border:.5px solid var(--bd)}
+.fp-hdr{display:flex;align-items:center;gap:10px;padding:14px 16px 10px}
+.fp-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;cursor:pointer}
+.fp-name{font-size:14px;font-weight:600;cursor:pointer}
+.fp-meta{font-size:11px;color:var(--dust);margin-top:1px}
+.fp-vis{font-size:9px;color:var(--dust);margin-left:auto;background:var(--chalk2);padding:3px 8px;border-radius:100px;font-weight:600;flex-shrink:0}
+.fp-img{width:100%;max-height:400px;object-fit:cover}
+.fp-body{padding:12px 16px 14px}
+.fp-stats{display:flex;gap:8px;margin-bottom:10px}
+.fp-stat{background:var(--chalk2);border-radius:10px;padding:8px 12px;text-align:center;flex:1}
+.fp-stat-n{font-family:'Bodoni Moda',serif;font-size:18px;font-weight:400}
+.fp-stat-l{font-size:9px;color:var(--dust);font-weight:600;letter-spacing:.04em;margin-top:1px}
+.fp-cap{font-size:13px;color:var(--void2);line-height:1.55;margin-bottom:10px}
+.fp-acts{display:flex;align-items:center;gap:12px}
+.like-btn{background:none;color:var(--dust);font-size:13px;font-weight:500;display:flex;align-items:center;gap:5px;padding:0;transition:color .2s}
+.like-btn.liked{color:#e8547a}
+.comment-btn{background:none;color:var(--dust);font-size:13px;font-weight:500;display:flex;align-items:center;gap:5px;padding:0}
+.fp-time{font-size:11px;color:var(--dust);margin-left:auto}
+.fp-comments{border-top:.5px solid var(--bds);padding:10px 16px}
+.fc-item{display:flex;gap:8px;margin-bottom:7px}
+.fc-av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
+.fc-name{font-size:11px;font-weight:600}
+.fc-text{font-size:12px;color:var(--void2);margin-top:1px;line-height:1.4}
+.fc-input-row{display:flex;gap:8px;margin-top:8px;border-top:.5px solid var(--bds);padding-top:10px}
+.fc-input{flex:1;padding:8px 12px;border:.5px solid var(--bd);border-radius:100px;font-size:13px;background:var(--chalk2);color:var(--void)}
+.fc-send{background:var(--void);color:var(--chalk);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:600}
+.create-bar{background:#fff;border-radius:20px;margin-bottom:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);border:.5px solid var(--bd);cursor:pointer}
+.cb-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.cb-ph{font-size:14px;color:var(--dust);flex:1}
+.feed-empty{text-align:center;padding:40px 20px;color:var(--dust);font-size:14px;line-height:1.75}
+
+/* ── MILESTONES ── */
+.ms-dark{background:var(--void);padding:36px 24px 44px}
+.ms-eye{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,180,160,0.45);margin-bottom:10px;font-weight:600}
+.ms-dh{font-family:'Bodoni Moda',serif;font-size:36px;font-weight:400;color:var(--chalk);line-height:1.12;margin-bottom:6px}
+.ms-dh em{color:var(--blush);font-style:italic}
+.ms-ds{font-size:13px;color:rgba(250,248,243,0.35);line-height:1.65;font-weight:300}
+.ms-pb{background:rgba(250,248,243,0.07);border-radius:100px;height:2px;margin-top:18px;overflow:hidden}
+.ms-pf{height:100%;background:linear-gradient(90deg,var(--blush2),var(--blush));border-radius:100px;transition:width 1s ease}
+.ms-tw{padding:20px 20px 6px;background:var(--chalk);border-radius:24px 24px 0 0;position:relative;z-index:1;margin-top:-18px}
+.ms-line{position:absolute;top:38px;left:32px;right:32px;height:1.5px;background:var(--chalk3)}
+.ms-lf{position:absolute;top:38px;left:32px;height:1.5px;background:linear-gradient(90deg,var(--blush2),var(--blush));transition:width 1s ease}
+.ms-nodes{display:flex;justify-content:space-between;position:relative;z-index:1}
+.msn{display:flex;flex-direction:column;align-items:center;gap:5px}
+.msn-c{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--chalk2);border:2px solid var(--chalk3);transition:all .3s}
+.msn.earned .msn-c{background:var(--void);border-color:var(--void)}
+.msn.next .msn-c{background:#fff5f2;border-color:var(--blush);animation:pls 2.5s ease-in-out infinite}
+@keyframes pls{0%,100%{box-shadow:0 0 0 0 rgba(232,180,160,.45)}60%{box-shadow:0 0 0 9px rgba(232,180,160,0)}}
+.msn-n{font-size:9px;font-weight:700;color:var(--dust)}
+.msn.earned .msn-n,.msn.next .msn-n{color:var(--blush2)}
+.ms-cards{display:flex;flex-direction:column;gap:10px}
+.ms-card{background:#fff;border:1.5px solid var(--bd);border-radius:20px;padding:16px;display:flex;align-items:center;gap:13px;box-shadow:var(--sh)}
+.ms-card.earned{background:var(--chalk2);border-color:var(--chalk3)}
+.ms-card.next{border-color:var(--blush)}
+.ms-card.locked{opacity:.3}
+.ms-ic{font-size:24px;width:42px;text-align:center;flex-shrink:0}
+.ms-body{flex:1;min-width:0}
+.ms-ti{font-size:14px;font-weight:600;margin-bottom:2px}
+.ms-de{font-size:12px;color:var(--dust);line-height:1.45;margin-bottom:7px}
+.ms-bg{height:3px;background:var(--chalk2);border-radius:100px;overflow:hidden}
+.ms-bar{height:100%;background:linear-gradient(90deg,var(--blush2),var(--blush));border-radius:100px;transition:width .8s}
+.ms-me{font-size:11px;color:var(--dust);margin-top:4px;font-weight:500}
+.ms-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.done-tag{background:var(--void);color:var(--chalk);font-size:9px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:.05em;text-align:center}
+.cam-ms-btn{background:linear-gradient(135deg,var(--blush2),var(--blush));color:#fff;border-radius:10px;padding:7px 10px;font-size:10px;font-weight:700;text-align:center}
+.cam-ms-btn:active{transform:scale(.96);transition:transform .15s}
+
+/* ── REWARDS ── */
+.rw-hdr{padding:28px 20px 20px;background:#fff;border-bottom:.5px solid var(--bd)}
+.rw-ti{font-family:'Bodoni Moda',serif;font-size:34px;font-weight:400;line-height:1.12;margin-bottom:4px}
+.rw-ti em{color:var(--blush2);font-style:italic}
+.rw-sub{font-size:13px;color:var(--dust)}
+.rw-list{display:flex;flex-direction:column;gap:10px}
+.rw-card{background:#fff;border:1.5px solid var(--bd);border-radius:20px;padding:15px;display:flex;align-items:center;gap:13px;box-shadow:var(--sh)}
+.rw-card.can{border-color:var(--blush)}
+.rw-card.no{opacity:.35}
+.rw-ico{width:50px;height:50px;border-radius:14px;background:var(--chalk2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.rw-body{flex:1;min-width:0}
+.rw-name{font-size:14px;font-weight:600;margin-bottom:2px}
+.rw-desc{font-size:12px;color:var(--dust);margin-bottom:5px;line-height:1.4}
+.pts-pill{display:inline-block;font-size:11px;font-weight:700;color:var(--blush3);background:#fff0eb;padding:3px 10px;border-radius:100px}
+.pts-need{font-size:11px;color:var(--dust);margin-left:5px}
+.rdm-btn{background:var(--void);color:var(--chalk);border-radius:12px;padding:9px 13px;font-size:12px;font-weight:600;flex-shrink:0;transition:transform .15s}
+.rdm-btn:active{transform:scale(.96)}
+.rdm-btn.dim{background:var(--chalk2);color:var(--dust)}
+
+/* ── FRIENDS ── */
+.fr-dark{background:var(--void);padding:36px 24px 44px}
+.fr-dh{font-family:'Bodoni Moda',serif;font-size:34px;font-weight:400;color:var(--chalk);line-height:1.12;margin-bottom:5px}
+.fr-dh em{color:var(--blush);font-style:italic}
+.fr-ds{font-size:13px;color:rgba(250,248,243,0.35);line-height:1.65;font-weight:300}
+.fr-body{background:var(--chalk);border-radius:24px 24px 0 0;padding:20px;margin-top:-18px;position:relative;z-index:1}
+.af-row{display:flex;gap:10px;margin-bottom:6px}
+.af-inp{flex:1;padding:12px 14px;border:.5px solid var(--bd);border-radius:var(--rs);font-size:14px;background:#fff;color:var(--void)}
+.af-inp:focus{border-color:var(--blush)}
+.af-btn{background:var(--void);color:var(--chalk);border-radius:var(--rs);padding:12px 18px;font-size:13px;font-weight:600}
+.af-btn:active{transform:scale(.96);transition:transform .15s}
+.af-hint{font-size:11px;color:var(--dust);margin-bottom:16px}
+.freq{background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;box-shadow:var(--sh);border:.5px solid var(--blush)}
+.freq-name{flex:1;font-size:14px;font-weight:500}
+.freq-y{background:var(--sage);color:#fff;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:600}
+.freq-n{background:var(--chalk2);color:var(--dust);border-radius:10px;padding:7px 12px;font-size:12px}
+.fc-card{background:#fff;border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:13px;margin-bottom:8px;box-shadow:var(--sh);border:.5px solid var(--bd);cursor:pointer}
+.f-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0}
+.f-info{flex:1}
+.f-name{font-size:14px;font-weight:600}
+.f-meta{font-size:12px;color:var(--dust);margin-top:2px}
+.f-mini{display:flex;gap:12px;margin-top:6px}
+.f-ms{text-align:center}
+.f-ms-n{font-family:'Bodoni Moda',serif;font-size:18px;font-weight:400}
+.f-ms-l{font-size:9px;color:var(--dust);font-weight:600;letter-spacing:.04em}
+.no-fr{text-align:center;padding:32px 20px;color:var(--dust);font-size:13px;line-height:1.7}
+
+/* ── NOTIFICATIONS ── */
+.notif-item{display:flex;align-items:flex-start;gap:12px;padding:14px 20px;border-bottom:.5px solid var(--bds)}
+.notif-item.unread{background:#fff8f5}
+.notif-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.notif-msg{font-size:13px;color:var(--void);line-height:1.5}
+.notif-time{font-size:11px;color:var(--dust);margin-top:3px}
+
+/* ── PROFILE ── */
+.prof-dark{background:var(--void);padding:36px 24px 28px;text-align:center}
+.prof-av-wrap{width:76px;height:76px;border-radius:50%;margin:0 auto 12px;border:2px solid rgba(232,180,160,0.3);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#fff}
+.prof-name{font-family:'Bodoni Moda',serif;font-size:26px;font-weight:400;color:var(--chalk);margin-bottom:3px}
+.prof-joined{font-size:12px;color:rgba(250,248,243,0.3)}
+.prof-stats-row{display:flex;justify-content:center;gap:28px;margin-top:16px}
+.prof-stat-n{font-family:'Bodoni Moda',serif;font-size:24px;font-weight:400;color:#fff}
+.prof-stat-l{font-size:10px;color:rgba(250,248,243,0.3);font-weight:600;letter-spacing:.06em;margin-top:2px}
+.prof-body{background:var(--chalk);border-radius:24px 24px 0 0;padding:20px;margin-top:-16px;position:relative;z-index:1}
+.prof-ms-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.prof-ms-pill{background:var(--void);color:var(--chalk);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600}
+.prof-posts{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.prof-post-th{aspect-ratio:1;border-radius:6px;overflow:hidden;background:var(--chalk2);cursor:pointer}
+.prof-post-th img{width:100%;height:100%;object-fit:cover}
+.prof-post-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px}
+
+/* ── CAMERA ── */
+.cam-ov{position:fixed;inset:0;z-index:700;background:#000;display:none;flex-direction:column}
+.cam-ov.on{display:flex}
+.cam-inner{display:flex;flex-direction:column;height:100%}
+.cam-hdr{display:flex;align-items:center;justify-content:space-between;padding:max(60px,calc(env(safe-area-inset-top)+20px)) 20px 16px;background:#000}
+.cam-close-btn{background:rgba(255,255,255,.12);color:#fff;border-radius:50%;width:38px;height:38px;font-size:16px;display:flex;align-items:center;justify-content:center;border:.5px solid rgba(255,255,255,.15)}
+.cam-title-txt{color:#fff;font-size:15px;font-weight:600}
+.cam-spacer{width:38px}
+.cam-preview-wrap{flex:1;position:relative;overflow:hidden;background:#111}
+#cam-video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.cam-ms-badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(13,13,11,.8);backdrop-filter:blur(12px);border:1px solid rgba(232,180,160,.35);border-radius:18px;padding:12px 24px;text-align:center;white-space:nowrap}
+.badge-ic{font-size:22px;display:block;margin-bottom:4px}
+.badge-ti{font-size:13px;font-weight:700;color:#fff}
+.badge-st{font-size:11px;color:rgba(232,180,160,.75);margin-top:2px}
+.badge-mo{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.1em}
+.cam-btm{background:#000;padding:20px 28px max(32px,env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:20px}
+.cam-hint-txt{font-size:11px;color:rgba(255,255,255,.35);text-align:center;flex:1;line-height:1.5}
+.cam-shutter{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.15);border:3px solid #fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s}
+.cam-shutter:active{transform:scale(.92)}
+.cam-shutter-in{width:56px;height:56px;border-radius:50%;background:#fff}
+.cam-flip-btn{background:rgba(255,255,255,.12);color:#fff;border-radius:50%;width:46px;height:46px;font-size:20px;display:flex;align-items:center;justify-content:center;border:.5px solid rgba(255,255,255,.15)}
+
+/* RESULT */
+.res-ov{position:fixed;inset:0;z-index:800;background:#000;display:none;flex-direction:column}
+.res-ov.on{display:flex}
+.res-inner{display:flex;flex-direction:column;height:100%}
+.res-hdr{display:flex;align-items:center;justify-content:space-between;padding:max(60px,calc(env(safe-area-inset-top)+20px)) 20px 16px;background:#000}
+.retake-btn{background:rgba(255,255,255,.1);color:#fff;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;border:.5px solid rgba(255,255,255,.18);letter-spacing:.02em}
+.retake-btn:active{transform:scale(.96);transition:transform .15s}
+.res-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
+#result-canvas{max-width:100%;max-height:100%;object-fit:contain}
+
+/* FILTER ROW */
+.filter-row{display:flex;gap:8px;padding:12px 16px;background:#000;overflow-x:auto;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-opt{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.filter-thumb{width:52px;height:52px;border-radius:10px;overflow:hidden;border:2px solid transparent;transition:border-color .2s}
+.filter-thumb.sel{border-color:#fff}
+.filter-name{font-size:9px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:.04em}
+.filter-opt.sel .filter-name{color:#fff}
+
+.res-acts{background:#000;padding:12px 20px max(28px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+.res-save{background:rgba(255,255,255,.08);color:#fff;border-radius:14px;padding:13px;font-size:14px;font-weight:500;text-align:center;border:.5px solid rgba(255,255,255,.12)}
+.res-insta{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;border-radius:14px;padding:14px;font-size:14px;font-weight:700;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px}
+.res-insta:active{transform:scale(.98);transition:transform .15s}
+.res-feed{background:rgba(232,180,160,.12);color:var(--blush);border-radius:14px;padding:13px;font-size:14px;font-weight:600;text-align:center;border:1px solid rgba(232,180,160,.25)}
+
+/* POST MODAL */
+.modal-bg{position:fixed;inset:0;z-index:300;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.on{display:flex}
+.modal-ov{position:absolute;inset:0;background:rgba(13,13,11,.7);backdrop-filter:blur(8px)}
+.modal{background:var(--chalk);border-radius:28px 28px 0 0;padding:24px 24px max(36px,env(safe-area-inset-bottom));width:100%;max-width:430px;position:relative;z-index:1;transform:translateY(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);max-height:88vh;overflow-y:auto}
+.modal-bg.on .modal{transform:translateY(0)}
+.m-hdl{width:40px;height:4px;background:var(--chalk3);border-radius:2px;margin:0 auto 20px}
+.m-ti{font-family:'Bodoni Moda',serif;font-size:26px;font-weight:400;margin-bottom:4px}
+.m-sub{font-size:13px;color:var(--dust);margin-bottom:18px}
+.photo-zone{background:var(--chalk2);border:1.5px dashed var(--chalk3);border-radius:16px;padding:28px;text-align:center;margin-bottom:14px;cursor:pointer;transition:border-color .2s}
+.photo-zone:active{border-color:var(--blush)}
+.pz-em{font-size:36px;margin-bottom:6px}
+.pz-txt{font-size:13px;color:var(--dust)}
+.photo-preview{width:100%;border-radius:14px;margin-bottom:14px;object-fit:cover;max-height:200px}
+.post-cap{width:100%;padding:12px 14px;border:.5px solid var(--bd);border-radius:14px;font-size:14px;resize:none;background:var(--chalk2);color:var(--void);min-height:72px;margin-bottom:12px}
+.post-cap:focus{border-color:var(--blush);background:#fff}
+.vis-row{display:flex;gap:8px;margin-bottom:14px}
+.vis-opt{flex:1;background:var(--chalk2);border:1.5px solid transparent;border-radius:var(--rs);padding:10px;text-align:center;transition:all .2s}
+.vis-opt.sel{background:var(--void);border-color:var(--void)}
+.vis-em{font-size:18px;display:block;margin-bottom:3px}
+.vis-lb{font-size:11px;color:var(--dust);font-weight:600}
+.vis-opt.sel .vis-lb{color:var(--blush)}
+.mood-scale{display:flex;gap:8px;margin-bottom:14px}
+.ms-o{flex:1;background:var(--chalk2);border:1.5px solid transparent;border-radius:12px;padding:11px 3px;text-align:center;transition:all .2s}
+.ms-o.sel{background:var(--void);border-color:var(--void)}
+.ms-o-em{font-size:20px;display:block;margin-bottom:3px}
+.ms-o-lb{font-size:9px;color:var(--dust);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.ms-o.sel .ms-o-lb{color:var(--blush)}
+.mood-note{width:100%;padding:11px 14px;border:.5px solid var(--bd);border-radius:14px;font-size:14px;resize:none;background:var(--chalk2);color:var(--void);min-height:72px;margin-bottom:14px}
+.mood-note:focus{border-color:var(--blush);background:#fff}
+
+/* CELEBRATION */
+.cel-bg{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:28px}
+.cel-bg.on{display:flex}
+.cel-ov{position:absolute;inset:0;background:rgba(13,13,11,.88);backdrop-filter:blur(12px)}
+.cel-box{background:#fff;border-radius:28px;padding:40px 28px;text-align:center;max-width:340px;width:100%;position:relative;z-index:1;box-shadow:0 24px 64px rgba(13,13,11,.3)}
+.cel-em{font-size:64px;margin-bottom:14px;display:block}
+.cel-ti{font-family:'Bodoni Moda',serif;font-size:28px;font-weight:400;margin-bottom:8px;line-height:1.2}
+.cel-ti em{color:var(--blush2);font-style:italic}
+.cel-su{font-size:14px;color:var(--dust);line-height:1.7;margin-bottom:22px}
+.cel-acts{display:flex;flex-direction:column;gap:10px}
+.cel-cam{background:linear-gradient(135deg,var(--blush2),var(--blush));color:#fff;border-radius:14px;padding:14px;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+.cel-cam:active{transform:scale(.98);transition:transform .15s}
+.cel-close{background:var(--chalk2);color:var(--void);border-radius:14px;padding:14px;font-size:14px;font-weight:500}
+
+/* INSTALL */
+.install-banner{position:fixed;bottom:90px;left:16px;right:16px;background:var(--void);border:1px solid rgba(232,180,160,.25);border-radius:16px;padding:14px 16px;z-index:400;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none}
+.install-content{display:flex;align-items:flex-start;gap:12px}
+.install-icon{font-size:26px;flex-shrink:0}
+.install-title{font-size:13px;font-weight:600;color:var(--chalk);margin-bottom:3px}
+.install-sub{font-size:12px;color:rgba(250,248,243,.4);line-height:1.5}
+.install-close{background:none;color:rgba(250,248,243,.35);font-size:16px;flex-shrink:0;padding:2px}
+
+/* UTILS */
+.empty{text-align:center;padding:32px 0;font-size:13px;color:var(--dust);line-height:1.8}
+
+/* AVATAR COLORS */
+.av-coral{background:linear-gradient(135deg,#e8847a,#c4544a)}
+.av-sage{background:linear-gradient(135deg,#7a9e87,#4a7a5e)}
+.av-sky{background:linear-gradient(135deg,#7aaee8,#4a7abf)}
+.av-lilac{background:linear-gradient(135deg,#b87ae8,#8a4abf)}
+.av-sand{background:linear-gradient(135deg,#e8c47a,#c4944a)}
+.av-rose{background:linear-gradient(135deg,#e87ab4,#c44a8a)}
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING -->
+<div class="screen on" id="s-onboard">
+  <div class="ob">
+    <div class="ob-grain"></div>
+    <div class="ob-glow"></div>
+    <div class="ob-c">
+      <div class="ob-wordmark">PILA<span>.</span></div>
+      <div class="ob-hero">
+        <div class="ob-pill">Your Pilates, Celebrated</div>
+        <div class="ob-h">Every class<br>is a <em>moment.</em></div>
+        <div class="ob-sub">Track your practice. Share your milestones. Find your community. This is Strava — for Pilates girls.</div>
+      </div>
+      <div class="ob-acts">
+        <button class="ob-cta" onclick="openSheet('signup')">Start your journey</button>
+        <button class="ob-ghost" onclick="openSheet('login')">I already have an account</button>
+      </div>
+      <div class="ob-foot">Built for studios &amp; solo practitioners alike</div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div class="sh-bg" id="auth-sh" onclick="closeSB(event)">
+  <div class="sh-ov"></div>
+  <div class="sh">
+    <div class="sh-hdl"></div>
+    <div id="sl">
+      <div class="sh-ti">Welcome back</div>
+      <div class="sh-sub">Sign in to your account</div>
+      <div class="fld"><label>Email</label><input type="email" id="li-e" placeholder="you@email.com" autocomplete="email"></div>
+      <div class="fld"><label>Password</label><input type="password" id="li-p" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn-dark" onclick="doLogin()">Sign in</button>
+      <div class="auth-err" id="li-err"></div>
+      <div class="auth-sw">New here? <a onclick="switchSh('signup')">Create account</a></div>
+    </div>
+    <div id="ss" style="display:none">
+      <div class="sh-ti">Join PILA</div>
+      <div class="sh-sub">Create your free account</div>
+      <div class="fld"><label>Full name</label><input type="text" id="su-n" placeholder="Sarah Johnson" autocomplete="name"></div>
+      <div class="fld"><label>Email</label><input type="email" id="su-e" placeholder="you@email.com" autocomplete="email"></div>
+      <div class="fld"><label>Your studio (optional)</label><input type="text" id="su-st" placeholder="e.g. MOTIV Pilates, Toronto"></div>
+      <div class="fld"><label>Birthday — get bonus streak on your birthday 🎂</label><input type="date" id="su-bd"></div>
+      <div class="fld"><label>Password</label><input type="password" id="su-p" placeholder="At least 6 characters" autocomplete="new-password"></div>
+      <button class="btn-dark" onclick="doSignup()">Start my journey</button>
+      <div class="auth-err" id="su-err"></div>
+      <div class="auth-sw">Already a member? <a onclick="switchSh('login')">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="screen" id="s-app">
+  <div class="app-hdr">
+    <div class="hdr-logo">PILA<em>.</em></div>
+    <div class="hdr-right">
+      <div class="hdr-streak" id="h-streak">🔥 0</div>
+      <button style="background:none;font-size:20px;padding:0" onclick="switchTab('notifs',document.querySelector('[data-t=notifs]'));loadNotifs()">
+        🔔<div class="nb-badge" id="notif-badge" style="position:absolute;top:-2px;right:-2px">0</div>
+      </button>
+      <div class="hdr-pts" id="h-pts">0 pts</div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="tp on pb" id="tp-home">
+    <div class="home-hero">
+      <div class="home-greet">Good morning</div>
+      <div class="home-name" id="home-name">Loading…</div>
+    </div>
+    <div class="ring-card">
+      <svg style="width:0;height:0;position:absolute"><defs>
+        <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#c06845"/><stop offset="100%" style="stop-color:#e8b4a0"/>
+        </linearGradient>
+      </defs></svg>
+      <div class="ring-wrap">
+        <svg class="ring-svg" viewBox="0 0 150 150">
+          <circle class="ring-track" cx="75" cy="75" r="60"/>
+          <circle class="ring-fill" id="ring-arc" cx="75" cy="75" r="60"/>
+        </svg>
+        <div class="ring-in">
+          <div class="ring-n" id="ring-n">0</div>
+          <div class="ring-l">classes</div>
+          <div class="ring-nx" id="ring-nx">10 until free class</div>
+        </div>
+      </div>
+      <div class="ring-stats">
+        <div class="rs"><div class="rs-n" id="qs-cls">0</div><div class="rs-l">Total</div></div>
+        <div class="rs"><div class="rs-n" id="qs-str">0</div><div class="rs-l">Streak</div></div>
+        <div class="rs"><div class="rs-n" id="qs-pts">0</div><div class="rs-l">Points</div></div>
+      </div>
+    </div>
+    <div class="cal-card">
+      <div class="cal-top">
+        <div class="cal-title">Practice calendar</div>
+        <div class="cal-month" id="cal-month"></div>
+      </div>
+      <div class="cal-streak-txt" id="cal-streak">Start your streak</div>
+      <div class="cal-labels">
+        <div class="cal-lbl">S</div><div class="cal-lbl">M</div><div class="cal-lbl">T</div>
+        <div class="cal-lbl">W</div><div class="cal-lbl">T</div><div class="cal-lbl">F</div><div class="cal-lbl">S</div>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-legend">
+        <div class="cal-leg"><div class="cal-leg-ic" style="background:rgba(232,180,160,.4)"></div>Attended</div>
+        <div class="cal-leg"><div class="cal-leg-ic" style="background:rgba(232,180,160,.25)"></div>🔥 Streak</div>
+      </div>
+    </div>
+
+    <!-- LOG CLASS BUTTON -->
+    <div style="padding:0 16px 16px">
+      <button onclick="openLogModal()" style="width:100%;background:var(--void);color:var(--chalk);border-radius:16px;padding:16px;font-size:15px;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s" ontouchstart="this.style.transform='scale(.98)'" ontouchend="this.style.transform=''">
+        <span style="font-size:18px">➕</span> Log a class
+      </button>
+    </div>
+
+    <div class="mood-card">
+      <div class="mood-q">How did today feel?</div>
+      <div class="mood-qs">Tap to log your mood</div>
+      <div class="mood-row">
+        <button class="mopt" onclick="openMoodM(1)"><span class="mopt-em">😴</span><span class="mopt-lb">Tired</span></button>
+        <button class="mopt" onclick="openMoodM(2)"><span class="mopt-em">😐</span><span class="mopt-lb">Okay</span></button>
+        <button class="mopt" onclick="openMoodM(3)"><span class="mopt-em">🙂</span><span class="mopt-lb">Good</span></button>
+        <button class="mopt" onclick="openMoodM(4)"><span class="mopt-em">😄</span><span class="mopt-lb">Great</span></button>
+        <button class="mopt" onclick="openMoodM(5)"><span class="mopt-em">🤩</span><span class="mopt-lb">Amazing</span></button>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="ey">Recent activity</div>
+      <div id="act-list"><div class="empty">Log your first class to get started.</div></div>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div class="tp pb" id="tp-feed">
+    <div class="sec" style="padding-top:20px">
+      <div class="create-bar" onclick="openPostM()">
+        <div class="cb-av av-coral" id="feed-av">?</div>
+        <div class="cb-ph">Share your practice…</div>
+        <span style="font-size:20px">📸</span>
+      </div>
+      <div class="ey">Your community</div>
+      <div id="feed-list"><div class="feed-empty">Add friends to see their posts here.<br>Your community is waiting.</div></div>
+    </div>
+  </div>
+
+  <!-- MILESTONES -->
+  <div class="tp pb" id="tp-milestones">
+    <div class="ms-dark">
+      <div class="ms-eye">Your journey</div>
+      <div class="ms-dh">Every class<br><em>counts.</em></div>
+      <div class="ms-ds" id="ms-sub">Here's what you're building toward.</div>
+      <div class="ms-pb"><div class="ms-pf" id="ms-pf" style="width:0%"></div></div>
+    </div>
+    <div class="ms-tw">
+      <div style="position:relative;margin-bottom:20px;padding:0 8px">
+        <div class="ms-line"></div>
+        <div class="ms-lf" id="ms-lf" style="width:0%"></div>
+        <div class="ms-nodes">
+          <div class="msn" id="mn-1"><div class="msn-c">🌱</div><div class="msn-n">1</div></div>
+          <div class="msn" id="mn-5"><div class="msn-c">🔥</div><div class="msn-n">5</div></div>
+          <div class="msn" id="mn-10"><div class="msn-c">⭐</div><div class="msn-n">10</div></div>
+          <div class="msn" id="mn-25"><div class="msn-c">💪</div><div class="msn-n">25</div></div>
+          <div class="msn" id="mn-50"><div class="msn-c">🏆</div><div class="msn-n">50</div></div>
+          <div class="msn" id="mn-100"><div class="msn-c">✨</div><div class="msn-n">100</div></div>
+        </div>
+      </div>
+      <div class="sec" style="padding-top:0"><div class="ms-cards" id="ms-cards"></div></div>
+    </div>
+  </div>
+
+  <!-- FRIENDS -->
+  <div class="tp pb" id="tp-friends">
+    <div class="fr-dark">
+      <div class="fr-dh">Your<br><em>crew.</em></div>
+      <div class="fr-ds">Add friends to see their stats, streaks, and posts.</div>
+    </div>
+    <div class="fr-body">
+      <div class="ey">Add a friend</div>
+      <div class="af-row">
+        <input class="af-inp" id="friend-email" type="email" placeholder="friend@email.com">
+        <button class="af-btn" onclick="sendFR()">Add</button>
+      </div>
+      <div class="af-hint">Enter their PILA email address.</div>
+      <div id="freq-sec" style="display:none">
+        <div class="ey">Requests</div>
+        <div id="freq-list"></div>
+      </div>
+      <div class="ey">Friends</div>
+      <div id="friends-list"><div class="no-fr">No friends yet.<br>Add someone by their email.</div></div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div class="tp pb" id="tp-notifs">
+    <div style="padding:28px 20px 16px">
+      <div style="font-family:'Bodoni Moda',serif;font-size:34px;font-weight:400;margin-bottom:4px">Updates</div>
+      <div style="font-size:13px;color:var(--dust)">Your latest from PILA.</div>
+    </div>
+    <div id="notif-list"><div class="empty">No notifications yet.</div></div>
+  </div>
+
+  <nav class="btm-nav">
+    <button class="nb on" data-t="home" onclick="switchTab('home',this)"><div class="nb-ic">🏠</div><div class="nb-lb">Home</div><div class="nb-dot"></div></button>
+    <button class="nb" data-t="feed" onclick="switchTab('feed',this);loadFeed()"><div class="nb-ic">📸</div><div class="nb-lb">Feed</div><div class="nb-dot"></div></button>
+    <button class="nb" data-t="milestones" onclick="switchTab('milestones',this)"><div class="nb-ic">🏆</div><div class="nb-lb">Journey</div><div class="nb-dot"></div></button>
+    <button class="nb" data-t="friends" onclick="switchTab('friends',this);loadFriends()">
+      <div class="nb-ic">👥</div><div class="nb-lb">Friends</div>
+      <div class="nb-badge" id="fr-badge">0</div>
+      <div class="nb-dot"></div>
+    </button>
+    <button class="nb" data-t="notifs" style="display:none" id="nb-notifs"><div class="nb-ic">🔔</div><div class="nb-lb">Updates</div><div class="nb-dot"></div></button>
+  </nav>
+</div>
+
+<!-- LOG CLASS MODAL -->
+<div class="modal-bg" id="log-modal" onclick="closeMB(event,'log-modal')">
+  <div class="modal-ov"></div>
+  <div class="modal">
+    <div class="m-hdl"></div>
+    <div class="m-ti">Log a class</div>
+    <div class="m-sub">What did you do today?</div>
+    <div class="fld"><label>Class type</label>
+      <select id="log-type" style="width:100%;padding:12px 14px;border:.5px solid var(--bd);border-radius:var(--rs);font-size:14px;background:var(--chalk2);color:var(--void);-webkit-appearance:none">
+        <option>Reformer</option>
+        <option>Mat Pilates</option>
+        <option>Barre</option>
+        <option>Yoga</option>
+        <option>HIIT</option>
+        <option>Stretch & Recovery</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="fld"><label>Studio (optional)</label><input type="text" id="log-studio" placeholder="e.g. MOTIV Pilates"></div>
+    <div class="fld"><label>Notes (optional)</label><input type="text" id="log-notes" placeholder="e.g. PR on the reformer today!"></div>
+    <button class="btn-dark" onclick="selfLogClass()" style="margin-top:6px">Log class ✦</button>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div class="modal-bg" id="post-modal" onclick="closeMB(event,'post-modal')">
+  <div class="modal-ov"></div>
+  <div class="modal">
+    <div class="m-hdl"></div>
+    <div class="m-ti">Share your practice</div>
+    <div class="m-sub">Post a moment with your crew.</div>
+    <div class="photo-zone" id="photo-zone" onclick="document.getElementById('photo-inp').click()">
+      <div class="pz-em">📷</div><div class="pz-txt">Tap to add a photo</div>
+    </div>
+    <input type="file" id="photo-inp" accept="image/*" capture="user" style="display:none" onchange="handlePhoto(event)">
+    <img id="photo-prev" class="photo-preview" style="display:none">
+    <textarea class="post-cap" id="post-cap" placeholder="How was your class today? ✦"></textarea>
+    <div class="m-sub" style="margin-bottom:8px">Who can see this?</div>
+    <div class="vis-row">
+      <div class="vis-opt sel" data-v="friends" onclick="pickVis('friends',this)"><span class="vis-em">👥</span><span class="vis-lb">Friends</span></div>
+      <div class="vis-opt" data-v="private" onclick="pickVis('private',this)"><span class="vis-em">🔒</span><span class="vis-lb">Just me</span></div>
+    </div>
+    <button class="btn-dark" onclick="submitPost()">Post ✦</button>
+  </div>
+</div>
+
+<!-- MOOD MODAL -->
+<div class="modal-bg" id="mood-modal" onclick="closeMB(event,'mood-modal')">
+  <div class="modal-ov"></div>
+  <div class="modal">
+    <div class="m-hdl"></div>
+    <div class="m-ti">How did that feel?</div>
+    <div class="m-sub">One tap. Your journey, tracked over time.</div>
+    <div class="mood-scale" id="mood-scale">
+      <div class="ms-o" data-v="1" onclick="pickMood(1)"><span class="ms-o-em">😴</span><span class="ms-o-lb">Tired</span></div>
+      <div class="ms-o" data-v="2" onclick="pickMood(2)"><span class="ms-o-em">😐</span><span class="ms-o-lb">Okay</span></div>
+      <div class="ms-o" data-v="3" onclick="pickMood(3)"><span class="ms-o-em">🙂</span><span class="ms-o-lb">Good</span></div>
+      <div class="ms-o" data-v="4" onclick="pickMood(4)"><span class="ms-o-em">😄</span><span class="ms-o-lb">Great</span></div>
+      <div class="ms-o" data-v="5" onclick="pickMood(5)"><span class="ms-o-em">🤩</span><span class="ms-o-lb">Amazing</span></div>
+    </div>
+    <textarea class="mood-note" id="mood-note" placeholder="Any notes? (optional)"></textarea>
+    <button class="btn-dark" onclick="submitMood()">Save ✦</button>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-bg" id="prof-modal" onclick="closeMB(event,'prof-modal')">
+  <div class="modal-ov"></div>
+  <div class="modal" style="padding:0;border-radius:28px 28px 0 0;overflow:hidden;max-height:90vh">
+    <div id="prof-content" style="overflow-y:auto;max-height:90vh"></div>
+  </div>
+</div>
+
+<!-- CAMERA -->
+<div class="cam-ov" id="cam-ov">
+  <div class="cam-inner">
+    <div class="cam-hdr">
+      <button class="cam-close-btn" onclick="closeCamera()">✕</button>
+      <div class="cam-title-txt">Capture your moment</div>
+      <div class="cam-spacer"></div>
+    </div>
+    <div class="cam-preview-wrap">
+      <video id="cam-video" autoplay playsinline muted></video>
+      <div class="cam-ms-badge" id="cam-ms-badge"></div>
+    </div>
+    <div class="cam-btm">
+      <div class="cam-hint-txt">Your stats appear automatically on the photo</div>
+      <button class="cam-shutter" onclick="takePhoto()" id="cam-shutter">
+        <div class="cam-shutter-in"></div>
+      </button>
+      <button class="cam-flip-btn" onclick="flipCamera()">🔄</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="res-ov" id="res-ov">
+  <div class="res-inner">
+    <div class="res-hdr">
+      <button class="retake-btn" onclick="retakePhoto()">↩ Retake</button>
+      <div class="cam-title-txt">Your moment</div>
+      <div class="cam-spacer"></div>
+    </div>
+    <div class="res-img-wrap">
+      <canvas id="result-canvas"></canvas>
+    </div>
+    <!-- FILTER ROW -->
+    <div class="filter-row" id="filter-row">
+      <div class="filter-opt sel" data-f="none" onclick="applyFilter('none',this)">
+        <div class="filter-thumb sel" id="ft-none"></div>
+        <div class="filter-name">Original</div>
+      </div>
+      <div class="filter-opt" data-f="warm" onclick="applyFilter('warm',this)">
+        <div class="filter-thumb" id="ft-warm"></div>
+        <div class="filter-name">Warm</div>
+      </div>
+      <div class="filter-opt" data-f="cool" onclick="applyFilter('cool',this)">
+        <div class="filter-thumb" id="ft-cool"></div>
+        <div class="filter-name">Cool</div>
+      </div>
+      <div class="filter-opt" data-f="fade" onclick="applyFilter('fade',this)">
+        <div class="filter-thumb" id="ft-fade"></div>
+        <div class="filter-name">Fade</div>
+      </div>
+      <div class="filter-opt" data-f="noir" onclick="applyFilter('noir',this)">
+        <div class="filter-thumb" id="ft-noir"></div>
+        <div class="filter-name">Noir</div>
+      </div>
+      <div class="filter-opt" data-f="bloom" onclick="applyFilter('bloom',this)">
+        <div class="filter-thumb" id="ft-bloom"></div>
+        <div class="filter-name">Bloom</div>
+      </div>
+    </div>
+    <div class="res-acts">
+      <button class="res-save" onclick="saveResultPhoto()">⬇️ Save to camera roll</button>
+      <button class="res-insta" onclick="shareToInsta()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Share to Instagram Story
+      </button>
+      <button class="res-feed" onclick="postToFeed()">✦ Post to friends feed</button>
+    </div>
+  </div>
+</div>
+
+<!-- CELEBRATION -->
+<div class="cel-bg" id="cel-bg">
+  <div class="cel-ov"></div>
+  <div class="cel-box">
+    <span class="cel-em" id="cel-em">🎉</span>
+    <div class="cel-ti" id="cel-ti">Milestone!</div>
+    <div class="cel-su" id="cel-su"></div>
+    <div class="cel-acts">
+      <button class="cel-cam" id="cel-cam-btn" onclick="openCamFromCel()" style="display:none">📸 Capture this moment</button>
+      <button class="cel-close" onclick="closeCel()">Keep going ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- INSTALL PROMPT -->
+<div class="install-banner" id="install-banner">
+  <div class="install-content">
+    <div class="install-icon">📲</div>
+    <div style="flex:1">
+      <div class="install-title">Add PILA to your home screen</div>
+      <div class="install-sub">Tap <strong style="color:rgba(250,248,243,.6)">Share</strong> then <strong style="color:rgba(250,248,243,.6)">"Add to Home Screen"</strong></div>
+    </div>
+    <button class="install-close" onclick="dismissInstall()">✕</button>
+  </div>
+</div>
+
+<div class="toast" style="position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--void);color:var(--chalk);font-size:13px;font-weight:500;padding:12px 22px;border-radius:100px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:999;max-width:88vw;text-align:center;box-shadow:0 4px 20px rgba(13,13,11,.25)" id="toast"></div>
+
+<script>
+const API = location.origin
+let tok = localStorage.getItem('pila_tok')
+let me = null, acts = [], selMood = 0, selVis = 'friends'
+let camStream = null, camFacing = 'user', curMs = null
+let rawPhotoData = null, currentFilter = 'none', photoUrl = null
+let pendingReqs = [], unreadNotifs = 0
+
+const AV_COLORS = ['av-coral','av-sage','av-sky','av-lilac','av-sand','av-rose']
+function avColor(name) { const i = name.charCodeAt(0) % AV_COLORS.length; return AV_COLORS[i] }
+
+const MILESTONES = [
+  {n:1,ic:'🌱',ti:'First class',de:"You showed up. That's everything."},
+  {n:5,ic:'🔥',ti:'On a roll',de:"Five classes in. It's becoming a habit."},
+  {n:10,ic:'⭐',ti:'10 classes',de:'Double digits. You\'re committed.'},
+  {n:25,ic:'💪',ti:'25 classes',de:'A quarter century of showing up.'},
+  {n:50,ic:'🏆',ti:'50 classes',de:'You\'re a Pilates girl now. Officially.'},
+  {n:100,ic:'✨',ti:'100 classes',de:'An icon. A legend. This is you.'},
+]
+const MOODS = ['','😴','😐','🙂','😄','🤩']
+const MOOD_LABELS = ['','Tired','Okay','Good','Great','Amazing']
+const NOTIF_ICONS = {points:'✦',milestone:'🎉',referral:'🤝',friend_request:'👋',friend_accept:'🎉',friend_milestone:'🏆',post:'📸',like:'❤️',comment:'💬',message:'📩',class:'🧘'}
+
+async function api(m,p,b){
+  const o={method:m,headers:{'Content-Type':'application/json'}}
+  if(tok)o.headers['Authorization']='Bearer '+tok
+  if(b)o.body=JSON.stringify(b)
+  try{return(await fetch(API+p,o)).json()}catch(e){return{error:'Network error'}}
+}
+
+async function init(){
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('/pila-sw.js').catch(()=>{})
+  if(!tok)return
+  const d = await api('GET','/api/me')
+  if(d.error){localStorage.removeItem('pila_tok');tok=null;return}
+  me=d.user;acts=d.activity||[];pendingReqs=d.pendingRequests||[];unreadNotifs=d.unreadNotifs||0
+  showApp()
+}
+
+function showApp(){
+  document.getElementById('s-onboard').classList.remove('on')
+  document.getElementById('s-app').classList.add('on')
+  document.getElementById('auth-sh').classList.remove('on')
+  renderAll()
+  showInstallPrompt()
+}
+
+function renderAll(){
+  if(!me)return
+  const pts=me.points,cls=me.totalClasses,str=me.currentStreak||0
+  // Greet by time
+  const h=new Date().getHours()
+  document.querySelector('.home-greet').textContent = h<12?'Good morning':h<17?'Good afternoon':'Good evening'
+  document.getElementById('h-pts').textContent=pts+' pts'
+  document.getElementById('h-streak').textContent='🔥 '+str
+  const fn=me.name.split(' ')[0]
+  document.getElementById('home-name').innerHTML=fn+',<br><em>keep moving.</em>'
+  // Feed avatar
+  const avEl=document.getElementById('feed-av')
+  avEl.textContent=fn[0].toUpperCase()
+  avEl.className='cb-av '+avColor(fn)
+  // Badges
+  const nb=document.getElementById('notif-badge')
+  if(unreadNotifs>0){nb.textContent=unreadNotifs;nb.style.display='flex'}else nb.style.display='none'
+  const fb=document.getElementById('fr-badge')
+  if(pendingReqs.length>0){fb.textContent=pendingReqs.length;fb.classList.add('on')}else fb.classList.remove('on')
+  // Ring — based on classes toward next milestone
+  const circ=2*Math.PI*60
+  const arc=document.getElementById('ring-arc')
+  const nextMs=MILESTONES.find(m=>m.n>cls)||MILESTONES[MILESTONES.length-1]
+  const prevMs=MILESTONES.filter(m=>m.n<=cls).pop()
+  const prevN=prevMs?prevMs.n:0
+  const pct=(cls-prevN)/Math.max(1,nextMs.n-prevN)
+  arc.style.strokeDasharray=circ
+  arc.style.strokeDashoffset=circ*(1-Math.min(pct,1))
+  document.getElementById('ring-n').textContent=cls
+  document.getElementById('ring-nx').textContent=cls>=100?'Legend ✨':(nextMs.n-cls)+' until '+nextMs.ti
+  document.getElementById('qs-cls').textContent=cls
+  document.getElementById('qs-str').textContent=str
+  document.getElementById('qs-pts').textContent=pts
+  renderCalendar(str)
+  renderActivity()
+  renderMilestones(cls)
+}
+
+function renderCalendar(streak){
+  const today=new Date(),yr=today.getFullYear(),mo=today.getMonth()
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December']
+  document.getElementById('cal-month').textContent=months[mo]
+  const streakEm = streak>=14?'🔥🔥':streak>=7?'🔥':''
+  document.getElementById('cal-streak').innerHTML=streak>0?`<em>${streak}</em> week streak ${streakEm}`:'Start your streak'
+  const firstDay=new Date(yr,mo,1).getDay(),daysInMo=new Date(yr,mo+1,0).getDate()
+  const classDays=new Set()
+  acts.filter(a=>a.type==='class').forEach(a=>{
+    const d=new Date(a.createdAt)
+    if(d.getFullYear()===yr&&d.getMonth()===mo)classDays.add(d.getDate())
+  })
+  let html=''
+  for(let i=0;i<firstDay;i++)html+='<div class="cd" style="opacity:.2"></div>'
+  for(let d=1;d<=daysInMo;d++){
+    const isToday=d===today.getDate(),isFuture=d>today.getDate()
+    const went=classDays.has(d),daysAgo=today.getDate()-d
+    const inStreak=went&&daysAgo>=0&&daysAgo<streak*7
+    let c='cd'+(isToday?' today':'')+(isFuture?' future':'')
+    let inner=`<span>${d}</span>`
+    if(!isFuture&&went&&inStreak){c='cd fire'+(isToday?' today':'');inner='🔥'}
+    else if(!isFuture&&went){c='cd went'+(isToday?' today':'');inner=`<span style="font-weight:700">${d}</span>`}
+    html+=`<div class="${c}">${inner}</div>`
+  }
+  document.getElementById('cal-grid').innerHTML=html
+}
+
+function renderActivity(){
+  const el=document.getElementById('act-list')
+  if(!acts.length){el.innerHTML='<div class="empty">Log your first class to get started.</div>';return}
+  el.innerHTML=acts.slice(0,8).map(a=>{
+    const earn=a.points>0
+    const ico=a.type==='referral'?'🤝':a.type==='redeem'?'🎁':a.type==='class'?'🧘':'✦'
+    const bg=a.type==='referral'?'#e8f5ee':a.type==='redeem'?'var(--chalk2)':'#fff5f2'
+    const d=new Date(a.createdAt).toLocaleDateString('en-CA',{month:'short',day:'numeric'})
+    return`<div class="act-row">
+      <div class="act-ico" style="background:${bg}">${ico}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:500">${a.label}</div><div style="font-size:11px;color:var(--dust);margin-top:1px">${d}</div></div>
+      <div style="font-size:13px;font-weight:600;color:${earn?'var(--sage2)':'var(--dust)'}">${earn?'+':''}${a.points}</div>
+    </div>`
+  }).join('')
+}
+
+function renderMilestones(cls){
+  const pct=Math.min(cls/100*100,100)
+  document.getElementById('ms-pf').style.width=pct+'%'
+  document.getElementById('ms-lf').style.width=pct+'%'
+  document.getElementById('ms-sub').textContent=cls>0?`You've taken ${cls} class${cls!==1?'es':''}. Here's what you're building toward.`:"Here's what you're building toward."
+  const thresh=[1,5,10,25,50,100]
+  thresh.forEach((n,i)=>{
+    const el=document.getElementById('mn-'+n);if(!el)return
+    el.className='msn'+(cls>=n?' earned':cls>=(thresh[i-1]||0)&&cls<n?' next':'')
+  })
+  document.getElementById('ms-cards').innerHTML=MILESTONES.map((m,i)=>{
+    const done=cls>=m.n,isNext=!done&&cls>=(MILESTONES[i-1]?.n||0)
+    const pct2=Math.min(cls/m.n*100,100),c=done?'earned':isNext?'next':'locked'
+    return`<div class="ms-card ${c}">
+      <div class="ms-ic">${m.ic}</div>
+      <div class="ms-body">
+        <div class="ms-ti">${m.ti}</div><div class="ms-de">${m.de}</div>
+        <div class="ms-bg"><div class="ms-bar" style="width:${pct2}%"></div></div>
+        <div class="ms-me">${Math.min(cls,m.n)} of ${m.n}${done?' ✦ complete':' — '+(m.n-cls)+' to go'}</div>
+      </div>
+      ${done?`<div class="ms-btns"><div class="done-tag">Done ✦</div><button class="cam-ms-btn" onclick="openAchievementCamera({n:${m.n},ic:'${m.ic}',ti:'${m.ti}'})">📸 Capture</button></div>`:''}
+    </div>`
+  }).join('')
+}
+
+// ── SELF LOG CLASS ──
+async function selfLogClass(){
+  const classType=document.getElementById('log-type').value
+  const studio=document.getElementById('log-studio').value.trim()
+  const notes=document.getElementById('log-notes').value.trim()
+  const d=await api('POST','/api/self-log',{classType,studio,notes})
+  if(d.error){showToast('Error: '+d.error);return}
+  me=d.user;acts=[d.entry,...acts]
+  document.getElementById('log-modal').classList.remove('on')
+  document.getElementById('log-studio').value=''
+  document.getElementById('log-notes').value=''
+  renderAll()
+  if(d.newMilestones?.length){
+    const ms=MILESTONES.find(m=>m.n===d.newMilestones[0])
+    if(ms)celebrateMs(ms)
+  } else showToast('Class logged — +'+d.entry.points+' pts 🧘')
+}
+
+function celebrateMs(ms){
+  curMs=ms
+  document.getElementById('cel-em').textContent=ms.ic
+  document.getElementById('cel-ti').innerHTML=`<em>${ms.n} classes!</em>`
+  document.getElementById('cel-su').textContent=ms.de+' Capture this moment.'
+  document.getElementById('cel-cam-btn').style.display='flex'
+  document.getElementById('cel-bg').classList.add('on')
+}
+function openCamFromCel(){closeCel();openAchievementCamera(curMs)}
+function closeCel(){document.getElementById('cel-bg').classList.remove('on')}
+
+// ── CAMERA ──
+async function openAchievementCamera(ms){
+  curMs=ms
+  const badge=document.getElementById('cam-ms-badge')
+  badge.innerHTML=`<span class="badge-ic">${ms.ic}</span><div class="badge-ti">${ms.n} CLASSES</div><div class="badge-st">${ms.ti.replace(/\d+\s+classes?\s*[—-]?\s*/i,'').toUpperCase()||ms.ti.toUpperCase()}</div><div class="badge-mo">@pilaapp</div>`
+  document.getElementById('cam-ov').classList.add('on')
+  await startCamera()
+}
+
+async function startCamera(){
+  if(camStream)camStream.getTracks().forEach(t=>t.stop())
+  try{
+    camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:camFacing},audio:false})
+    document.getElementById('cam-video').srcObject=camStream
+  }catch(e){
+    closeCamera()
+    showToast('Camera not available — pick a photo instead')
+    document.getElementById('photo-inp').click()
+  }
+}
+
+function flipCamera(){camFacing=camFacing==='user'?'environment':'user';startCamera()}
+function closeCamera(){if(camStream)camStream.getTracks().forEach(t=>t.stop());camStream=null;document.getElementById('cam-ov').classList.remove('on')}
+
+function takePhoto(){
+  const video=document.getElementById('cam-video')
+  const W=video.videoWidth||1080,H=video.videoHeight||1920
+  const canvas=document.getElementById('result-canvas')
+  canvas.width=W;canvas.height=H
+  const ctx=canvas.getContext('2d')
+  // Snapchat style — mirror front camera
+  if(camFacing==='user'){ctx.translate(W,0);ctx.scale(-1,1)}
+  ctx.drawImage(video,0,0,W,H)
+  ctx.setTransform(1,0,0,1,0,0)
+  rawPhotoData=canvas.toDataURL('image/jpeg',0.95)
+  drawOverlay(ctx,W,H,curMs,'none')
+  buildFilterThumbs(rawPhotoData,W,H)
+  currentFilter='none'
+  document.querySelectorAll('.filter-opt').forEach(o=>o.classList.toggle('sel',o.dataset.f==='none'))
+  document.querySelectorAll('.filter-thumb').forEach(t=>t.classList.toggle('sel',t.id==='ft-none'))
+  closeCamera()
+  document.getElementById('res-ov').classList.add('on')
+}
+
+function buildFilterThumbs(raw,W,H){
+  const filters=['none','warm','cool','fade','noir','bloom']
+  filters.forEach(f=>{
+    const th=document.getElementById('ft-'+f)
+    if(!th)return
+    const tc=document.createElement('canvas')
+    tc.width=52;tc.height=52
+    const tx=tc.getContext('2d')
+    const img=new Image();img.src=raw
+    img.onload=()=>{
+      // Crop center square
+      const s=Math.min(img.width,img.height)
+      const sx=(img.width-s)/2,sy=(img.height-s)/2
+      tx.drawImage(img,sx,sy,s,s,0,0,52,52)
+      applyFilterToCtx(tx,52,52,f)
+      th.style.backgroundImage=`url(${tc.toDataURL()})`
+      th.style.backgroundSize='cover'
+    }
+  })
+}
+
+function applyFilter(f,el){
+  currentFilter=f
+  document.querySelectorAll('.filter-opt').forEach(o=>o.classList.remove('sel'))
+  document.querySelectorAll('.filter-thumb').forEach(t=>t.classList.remove('sel'))
+  el.classList.add('sel')
+  document.getElementById('ft-'+f).classList.add('sel')
+  // Redraw
+  const canvas=document.getElementById('result-canvas')
+  const ctx=canvas.getContext('2d')
+  const W=canvas.width,H=canvas.height
+  const img=new Image();img.src=rawPhotoData
+  img.onload=()=>{
+    ctx.clearRect(0,0,W,H)
+    ctx.drawImage(img,0,0,W,H)
+    applyFilterToCtx(ctx,W,H,f)
+    drawOverlay(ctx,W,H,curMs,f)
+  }
+}
+
+function applyFilterToCtx(ctx,W,H,f){
+  if(f==='none')return
+  const id=ctx.getImageData(0,0,W,H)
+  const d=id.data
+  for(let i=0;i<d.length;i+=4){
+    const r=d[i],g=d[i+1],b=d[i+2]
+    if(f==='warm'){d[i]=Math.min(255,r+20);d[i+1]=Math.min(255,g+8);d[i+2]=Math.max(0,b-15)}
+    else if(f==='cool'){d[i]=Math.max(0,r-15);d[i+1]=Math.min(255,g+5);d[i+2]=Math.min(255,b+25)}
+    else if(f==='fade'){const avg=(r+g+b)/3;d[i]=r*0.5+avg*0.3+40;d[i+1]=g*0.5+avg*0.3+40;d[i+2]=b*0.5+avg*0.3+40}
+    else if(f==='noir'){const lum=0.299*r+0.587*g+0.114*b;d[i]=lum;d[i+1]=lum;d[i+2]=lum}
+    else if(f==='bloom'){const factor=1.15;d[i]=Math.min(255,r*factor+10);d[i+1]=Math.min(255,g*factor+5);d[i+2]=Math.min(255,b*factor)}
+  }
+  ctx.putImageData(id,0,0)
+}
+
+function drawOverlay(ctx,W,H,ms,filter){
+  if(!ms)return
+  const sc=Math.max(W/390,1.5)
+  // Bottom gradient
+  const grad=ctx.createLinearGradient(0,H*0.5,0,H)
+  grad.addColorStop(0,'rgba(0,0,0,0)')
+  grad.addColorStop(1,'rgba(13,13,11,0.85)')
+  ctx.fillStyle=grad;ctx.fillRect(0,H*0.5,W,H*0.5)
+
+  // Stats
+  if(me){
+    const stats=[{n:me.totalClasses,l:'CLASSES'},{n:me.currentStreak||0,l:'STREAK'},{n:me.points,l:'POINTS'}]
+    const statW=W/3,statY=H*0.66
+    stats.forEach((s,i)=>{
+      const x=statW*i+statW/2
+      ctx.fillStyle='#fff'
+      ctx.font=`700 ${30*sc}px -apple-system,sans-serif`
+      ctx.textAlign='center'
+      ctx.shadowColor='rgba(0,0,0,0.6)';ctx.shadowBlur=10*sc
+      ctx.fillText(String(s.n),x,statY)
+      ctx.fillStyle='rgba(255,255,255,0.45)'
+      ctx.font=`600 ${10*sc}px -apple-system,sans-serif`
+      ctx.shadowBlur=0
+      ctx.fillText(s.l,x,statY+18*sc)
+    })
+    // Dividers
+    ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=0.5*sc
+    ;[1,2].forEach(i=>{const x=statW*i;ctx.beginPath();ctx.moveTo(x,statY-22*sc);ctx.lineTo(x,statY+20*sc);ctx.stroke()})
+  }
+
+  // Divider line
+  ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=0.5*sc
+  ctx.beginPath();ctx.moveTo(W*0.1,H*0.73);ctx.lineTo(W*0.9,H*0.73);ctx.stroke()
+
+  // Achievement pill
+  const bY=H*0.748,bW=210*sc,bH=38*sc,bX=(W-bW)/2
+  ctx.fillStyle='rgba(232,180,160,0.9)'
+  roundRect(ctx,bX,bY,bW,bH,19*sc);ctx.fill()
+  ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=0.5*sc
+  roundRect(ctx,bX,bY,bW,bH,19*sc);ctx.stroke()
+  ctx.fillStyle=filter==='noir'?'#fff':'#1a0d08'
+  ctx.font=`700 ${13*sc}px -apple-system,sans-serif`
+  ctx.textAlign='center';ctx.shadowBlur=0
+  const lbl=ms.ti.replace(/\d+\s+classes?\s*[—-]?\s*/i,'').toUpperCase()||ms.ti.toUpperCase()
+  ctx.fillText(ms.ic+'  '+lbl,W/2,bY+bH*0.66)
+
+  // Name — well spaced
+  if(me?.name){
+    ctx.fillStyle='rgba(255,255,255,0.6)'
+    ctx.font=`500 ${11*sc}px -apple-system,sans-serif`
+    ctx.textAlign='center'
+    ctx.fillText(me.name.toUpperCase(),W/2,H*0.848)
+  }
+
+  // @pilaapp bold
+  ctx.fillStyle='#fff'
+  ctx.font=`800 ${18*sc}px -apple-system,sans-serif`
+  ctx.textAlign='center'
+  ctx.shadowColor='rgba(0,0,0,0.8)';ctx.shadowBlur=14*sc
+  ctx.fillText('@pilaapp',W/2,H*0.895)
+  ctx.shadowBlur=0
+
+  // Top watermark
+  ctx.fillStyle='rgba(255,255,255,0.5)'
+  ctx.font=`600 ${11*sc}px -apple-system,sans-serif`
+  ctx.textAlign='center'
+  ctx.fillText('PILA · YOUR PILATES JOURNEY',W/2,50*sc)
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath()
+}
+
+function retakePhoto(){document.getElementById('res-ov').classList.remove('on');rawPhotoData=null;openAchievementCamera(curMs)}
+function closeResult(){document.getElementById('res-ov').classList.remove('on');rawPhotoData=null}
+
+function saveResultPhoto(){
+  const canvas=document.getElementById('result-canvas')
+  const a=document.createElement('a');a.download='pila-moment.jpg';a.href=canvas.toDataURL('image/jpeg',0.92);a.click()
+  showToast('Saved! Open Instagram → + → Story 📸')
+}
+
+function shareToInsta(){
+  saveResultPhoto()
+  setTimeout(()=>{window.location.href='instagram://story-camera';setTimeout(()=>window.open('https://instagram.com','_blank'),1500)},800)
+}
+
+async function postToFeed(){
+  const canvas=document.getElementById('result-canvas')
+  const tc=document.createElement('canvas'),maxW=800,sc=Math.min(1,maxW/canvas.width)
+  tc.width=canvas.width*sc;tc.height=canvas.height*sc
+  tc.getContext('2d').drawImage(canvas,0,0,tc.width,tc.height)
+  photoUrl=tc.toDataURL('image/jpeg',0.82)
+  document.getElementById('photo-prev').src=photoUrl
+  document.getElementById('photo-prev').style.display='block'
+  document.getElementById('photo-zone').style.display='none'
+  closeResult();openPostM()
+}
+
+// ── FEED ──
+async function loadFeed(){
+  const d=await api('GET','/api/posts/feed')
+  if(!Array.isArray(d)||!d.length){
+    document.getElementById('feed-list').innerHTML='<div class="feed-empty">No posts yet from your friends.<br>Add friends to see their moments here.</div>'
+    return
+  }
+  document.getElementById('feed-list').innerHTML=d.map(p=>renderPost(p)).join('')
+}
+
+function renderPost(p){
+  const fn=(p.userName||'?').split(' ')[0]
+  const init=fn[0].toUpperCase()
+  const av=avColor(fn)
+  const d=new Date(p.createdAt).toLocaleDateString('en-CA',{month:'short',day:'numeric'})
+  const likeCount=p.likes?.length||0,liked=p.likes?.includes(me?.id)
+  const comments=(p.comments||[]).slice(-3)
+  return`<div class="feed-post" id="post-${p.id}">
+    <div class="fp-hdr">
+      <div class="fp-av ${av}" onclick="openProfile('${p.userId}')">${init}</div>
+      <div><div class="fp-name" onclick="openProfile('${p.userId}')">${p.userName}</div><div class="fp-meta">${p.classType||'Pilates'} · ${d}</div></div>
+      <div class="fp-vis">${p.visibility==='private'?'🔒':'👥'}</div>
+    </div>
+    ${p.imageData?`<img class="fp-img" src="${p.imageData}" alt="Class moment">`:''}
+    <div class="fp-body">
+      <div class="fp-stats">
+        <div class="fp-stat"><div class="fp-stat-n">${p.userStats?.totalClasses||0}</div><div class="fp-stat-l">Classes</div></div>
+        <div class="fp-stat"><div class="fp-stat-n">${p.userStats?.currentStreak||0}</div><div class="fp-stat-l">Streak</div></div>
+        <div class="fp-stat"><div class="fp-stat-n">${p.userStats?.points||0}</div><div class="fp-stat-l">Points</div></div>
+      </div>
+      ${p.caption?`<div class="fp-cap">${p.caption}</div>`:''}
+      <div class="fp-acts">
+        <button class="like-btn ${liked?'liked':''}" onclick="likePost('${p.id}',this)">${liked?'❤️':'🤍'} ${likeCount}</button>
+        <button class="comment-btn" onclick="toggleCmts('${p.id}')">💬 ${(p.comments||[]).length}</button>
+        <div class="fp-time">${d}</div>
+      </div>
+    </div>
+    <div class="fp-comments" id="cmt-${p.id}" style="display:none">
+      <div id="cmt-list-${p.id}">${comments.map(c=>`<div class="fc-item"><div class="fc-av ${avColor(c.userName||'?')}">${(c.userName||'?')[0].toUpperCase()}</div><div><div class="fc-name">${c.userName}</div><div class="fc-text">${c.text}</div></div></div>`).join('')}</div>
+      <div class="fc-input-row">
+        <input class="fc-input" id="ci-${p.id}" placeholder="Add a comment…" onkeydown="if(event.key==='Enter')submitCmt('${p.id}')">
+        <button class="fc-send" onclick="submitCmt('${p.id}')">Send</button>
+      </div>
+    </div>
+  </div>`
+}
+
+function toggleCmts(id){const el=document.getElementById('cmt-'+id);el.style.display=el.style.display==='none'?'block':'none'}
+
+async function likePost(id,btn){
+  const d=await api('POST',`/api/posts/${id}/like`)
+  if(!d.error){btn.innerHTML=`${d.liked?'❤️':'🤍'} ${d.likes}`;btn.classList.toggle('liked',d.liked)}
+}
+
+async function submitCmt(postId){
+  const inp=document.getElementById('ci-'+postId)
+  const text=inp.value.trim();if(!text)return
+  const d=await api('POST',`/api/posts/${postId}/comment`,{text})
+  if(d.error)return
+  inp.value=''
+  const list=document.getElementById('cmt-list-'+postId)
+  const c=d.comment,av=avColor(c.userName||'?')
+  list.innerHTML+=`<div class="fc-item"><div class="fc-av ${av}">${(c.userName||'?')[0].toUpperCase()}</div><div><div class="fc-name">${c.userName}</div><div class="fc-text">${c.text}</div></div></div>`
+  const btn=document.querySelector(`#post-${postId} .comment-btn`)
+  if(btn){const cur=parseInt(btn.textContent.replace('💬','').trim())||0;btn.textContent='💬 '+(cur+1)}
+}
+
+// ── PROFILE ──
+async function openProfile(userId){
+  const d=await api('GET',`/api/profile/${userId}`)
+  if(d.error)return
+  const u=d.user,posts=d.posts||[]
+  const fn=(u.name||'?').split(' ')[0]
+  const av=avColor(fn)
+  const joined=new Date(u.joinedAt).toLocaleDateString('en-CA',{month:'long',year:'numeric'})
+  const pills=(u.earnedMilestones||[]).map(n=>{const m=MILESTONES.find(x=>x.n===n);return m?`<div class="prof-ms-pill">${m.ic} ${n}</div>`:''}).join('')
+  const postsHtml=posts.map(p=>`<div class="prof-post-th">${p.imageData?`<img src="${p.imageData}">`:`<div class="prof-post-no-img">🧘</div>`}</div>`).join('')
+  document.getElementById('prof-content').innerHTML=`
+    <div class="prof-dark">
+      <div style="width:40px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:16px auto 20px"></div>
+      <div class="prof-av-wrap ${av}">${fn[0].toUpperCase()}</div>
+      <div class="prof-name">${u.name}</div>
+      <div class="prof-joined">Member since ${joined}${u.studio?' · '+u.studio:''}</div>
+      <div class="prof-stats-row">
+        <div class="prof-stat"><div class="prof-stat-n">${u.totalClasses}</div><div class="prof-stat-l">Classes</div></div>
+        <div class="prof-stat"><div class="prof-stat-n">${u.currentStreak||0}</div><div class="prof-stat-l">Streak</div></div>
+        <div class="prof-stat"><div class="prof-stat-n">${u.longestStreak||0}</div><div class="prof-stat-l">Best</div></div>
+        <div class="prof-stat"><div class="prof-stat-n">${u.points}</div><div class="prof-stat-l">Points</div></div>
+      </div>
+    </div>
+    <div class="prof-body">
+      ${pills?`<div class="ey" style="margin-bottom:10px">Milestones</div><div class="prof-ms-pills">${pills}</div>`:''}
+      <div class="ey" style="margin-bottom:10px">Moments</div>
+      ${postsHtml?`<div class="prof-posts">${postsHtml}</div>`:'<div class="empty" style="padding:20px 0">No posts yet.</div>'}
+      <div style="height:20px"></div>
+    </div>`
+  document.getElementById('prof-modal').classList.add('on')
+}
+
+// ── FRIENDS ──
+async function loadFriends(){
+  const d=await api('GET','/api/friends')
+  const el=document.getElementById('friends-list')
+  if(!Array.isArray(d)||!d.length){el.innerHTML='<div class="no-fr">No friends yet.<br>Add someone by their email.</div>'}
+  else{
+    el.innerHTML=d.map(f=>{
+      const fn=f.name.split(' ')[0],av=avColor(fn)
+      const em=f.currentStreak>=7?'🔥🔥':f.currentStreak>=3?'🔥':f.currentStreak>0?'✦':''
+      return`<div class="fc-card" onclick="openProfile('${f.id}')">
+        <div class="f-av ${av}">${fn[0].toUpperCase()}</div>
+        <div class="f-info">
+          <div class="f-name">${f.name}</div>
+          <div class="f-meta">${f.currentStreak} week streak ${em}</div>
+          <div class="f-mini">
+            <div class="f-ms"><div class="f-ms-n">${f.totalClasses}</div><div class="f-ms-l">Classes</div></div>
+            <div class="f-ms"><div class="f-ms-n">${f.points}</div><div class="f-ms-l">Points</div></div>
+            <div class="f-ms"><div class="f-ms-n">${f.longestStreak||0}</div><div class="f-ms-l">Best</div></div>
+          </div>
+        </div>
+      </div>`
+    }).join('')
+  }
+  const reqSec=document.getElementById('freq-sec'),reqEl=document.getElementById('freq-list')
+  if(pendingReqs.length>0){
+    reqSec.style.display='block'
+    reqEl.innerHTML=pendingReqs.map(r=>`<div class="freq">
+      <div style="font-size:20px">👋</div>
+      <div class="freq-name">${r.from?.name||'Someone'} wants to be friends</div>
+      <div style="display:flex;gap:8px">
+        <button class="freq-y" onclick="respondFR('${r.id}',true)">Accept</button>
+        <button class="freq-n" onclick="respondFR('${r.id}',false)">No</button>
+      </div>
+    </div>`).join('')
+  } else reqSec.style.display='none'
+}
+
+async function sendFR(){
+  const email=document.getElementById('friend-email').value.trim()
+  if(!email){showToast('Enter their email');return}
+  const d=await api('POST','/api/friends/request',{toEmail:email})
+  if(d.error){showToast(d.error);return}
+  document.getElementById('friend-email').value=''
+  showToast('Friend request sent to '+d.toName+' ✦')
+}
+
+async function respondFR(id,accept){
+  const d=await api('POST','/api/friends/respond',{requestId:id,accept})
+  if(d.error){showToast(d.error);return}
+  pendingReqs=pendingReqs.filter(r=>r.id!==id)
+  document.getElementById('fr-badge').classList.toggle('on',pendingReqs.length>0)
+  showToast(accept?'Friend added! ✦':'Request declined')
+  loadFriends()
+}
+
+// ── NOTIFICATIONS ──
+async function loadNotifs(){
+  const d=await api('GET','/api/notifications')
+  await api('POST','/api/notifications/read')
+  unreadNotifs=0;document.getElementById('notif-badge').style.display='none'
+  if(!Array.isArray(d)||!d.length){document.getElementById('notif-list').innerHTML='<div class="empty">No notifications yet.</div>';return}
+  document.getElementById('notif-list').innerHTML=d.map(n=>{
+    const ic=NOTIF_ICONS[n.type]||'✦'
+    const d2=new Date(n.createdAt).toLocaleDateString('en-CA',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})
+    return`<div class="notif-item ${n.read?'':'unread'}">
+      <div class="notif-ico">${ic}</div>
+      <div><div class="notif-msg">${n.message}</div><div class="notif-time">${d2}</div></div>
+    </div>`
+  }).join('')
+}
+
+// ── POST ──
+function openPostM(){document.getElementById('post-modal').classList.add('on')}
+function closeMB(e,id){if(e.target.classList.contains('modal-bg')||e.target.classList.contains('modal-ov'))document.getElementById(id).classList.remove('on')}
+function openLogModal(){document.getElementById('log-modal').classList.add('on')}
+
+function handlePhoto(e){
+  const file=e.target.files[0];if(!file)return
+  const reader=new FileReader()
+  reader.onload=ev=>{
+    photoUrl=ev.target.result
+    document.getElementById('photo-prev').src=photoUrl;document.getElementById('photo-prev').style.display='block'
+    document.getElementById('photo-zone').style.display='none'
+  }
+  reader.readAsDataURL(file)
+}
+
+function pickVis(v,el){selVis=v;document.querySelectorAll('.vis-opt').forEach(o=>o.classList.toggle('sel',o.dataset.v===v))}
+
+async function submitPost(){
+  const caption=document.getElementById('post-cap').value.trim()
+  let imgData=null
+  if(photoUrl){
+    const canvas=document.createElement('canvas'),img=new Image();img.src=photoUrl
+    await new Promise(r=>img.onload=r)
+    const maxW=800,sc=Math.min(1,maxW/img.width)
+    canvas.width=img.width*sc;canvas.height=img.height*sc
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height)
+    imgData=canvas.toDataURL('image/jpeg',0.82)
+  }
+  const d=await api('POST','/api/posts',{caption,imageData:imgData,visibility:selVis})
+  if(d.error){showToast('Error posting');return}
+  document.getElementById('post-modal').classList.remove('on')
+  document.getElementById('post-cap').value=''
+  document.getElementById('photo-prev').style.display='none'
+  document.getElementById('photo-zone').style.display='block'
+  photoUrl=null;showToast('Posted ✦');loadFeed()
+}
+
+// ── MOOD ──
+function openMoodM(v){selMood=v;document.querySelectorAll('#mood-scale .ms-o').forEach(o=>o.classList.toggle('sel',parseInt(o.dataset.v)===v));document.getElementById('mood-modal').classList.add('on')}
+function pickMood(v){selMood=v;document.querySelectorAll('#mood-scale .ms-o').forEach(o=>o.classList.toggle('sel',parseInt(o.dataset.v)===v))}
+async function submitMood(){
+  if(!selMood)return
+  const note=document.getElementById('mood-note').value.trim()
+  await api('POST','/api/mood',{score:selMood,note})
+  document.getElementById('mood-modal').classList.remove('on')
+  document.getElementById('mood-note').value=''
+  showToast('Mood logged '+MOODS[selMood])
+}
+
+// ── AUTH ──
+function openSheet(t){switchSh(t);document.getElementById('auth-sh').classList.add('on')}
+function closeSB(e){if(e.target===document.getElementById('auth-sh')||e.target.classList.contains('sh-ov'))document.getElementById('auth-sh').classList.remove('on')}
+function switchSh(t){document.getElementById('sl').style.display=t==='login'?'block':'none';document.getElementById('ss').style.display=t==='signup'?'block':'none'}
+
+async function doLogin(){
+  const e=document.getElementById('li-e').value.trim(),p=document.getElementById('li-p').value
+  const err=document.getElementById('li-err');err.textContent=''
+  if(!e||!p){err.textContent='Please fill in all fields';return}
+  const d=await api('POST','/api/login',{email:e,password:p})
+  if(d.error){err.textContent=d.error;return}
+  tok=d.token;localStorage.setItem('pila_tok',tok)
+  const full=await api('GET','/api/me')
+  me=full.user;acts=full.activity||[];pendingReqs=full.pendingRequests||[];unreadNotifs=full.unreadNotifs||0
+  showApp()
+}
+
+async function doSignup(){
+  const n=document.getElementById('su-n').value.trim(),e=document.getElementById('su-e').value.trim()
+  const st=document.getElementById('su-st').value.trim(),bd=document.getElementById('su-bd').value,p=document.getElementById('su-p').value
+  const err=document.getElementById('su-err');err.textContent=''
+  if(!n||!e||!p){err.textContent='Please fill in all fields';return}
+  if(p.length<6){err.textContent='Password must be at least 6 characters';return}
+  const d=await api('POST','/api/signup',{name:n,email:e,studio:st,birthday:bd,password:p})
+  if(d.error){err.textContent=d.error;return}
+  tok=d.token;localStorage.setItem('pila_tok',tok)
+  me=d.user;acts=[];pendingReqs=[];unreadNotifs=0
+  showApp()
+  setTimeout(()=>{
+    document.getElementById('cel-em').textContent='🌱'
+    document.getElementById('cel-ti').innerHTML='Welcome to <em>PILA</em>'
+    document.getElementById('cel-su').textContent='Your journey starts now. Log your first class and start building your streak.'
+    document.getElementById('cel-cam-btn').style.display='none'
+    document.getElementById('cel-bg').classList.add('on')
+  },400)
+}
+
+// ── PWA ──
+function showInstallPrompt(){
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)
+  const isStandalone=window.navigator.standalone===true
+  const dismissed=localStorage.getItem('pila_install_dismissed')
+  if(isIOS&&!isStandalone&&!dismissed){
+    setTimeout(()=>{document.getElementById('install-banner').style.display='block'},3000)
+  }
+}
+function dismissInstall(){document.getElementById('install-banner').style.display='none';localStorage.setItem('pila_install_dismissed','1')}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.tp').forEach(t=>t.classList.remove('on'))
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'))
+  document.getElementById('tp-'+name).classList.add('on')
+  if(btn)btn.classList.add('on')
+  window.scrollTo(0,0)
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)'
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(8px)'},3500)
+}
+
+init()
+</script>
+</body>
+</html>
