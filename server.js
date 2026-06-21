@@ -16,34 +16,11 @@ const db = createClient({
   authToken: process.env.TURSO_TOKEN
 })
 
-await db.executeMultiple(`
-  CREATE TABLE IF NOT EXISTS pila_users (
-    id TEXT PRIMARY KEY, name TEXT, email TEXT UNIQUE, studio TEXT,
-    password TEXT, birthday TEXT, points INTEGER DEFAULT 0,
-    totalClasses INTEGER DEFAULT 0, currentStreak INTEGER DEFAULT 0,
-    longestStreak INTEGER DEFAULT 0, lastClassWeek INTEGER,
-    lastClassDate TEXT, earnedMilestones TEXT DEFAULT '[]',
-    friends TEXT DEFAULT '[]',
-    joinedAt TEXT, moodHistory TEXT DEFAULT '[]', classDates TEXT DEFAULT '[]'
-  );
-  CREATE TABLE IF NOT EXISTS pila_activity (
-    id TEXT PRIMARY KEY, userId TEXT, type TEXT, label TEXT,
-    points INTEGER, createdAt TEXT
-  );
-  CREATE TABLE IF NOT EXISTS pila_posts (
-    id TEXT PRIMARY KEY, userId TEXT, userName TEXT, caption TEXT,
-    imageData TEXT, visibility TEXT, classType TEXT,
-    userStats TEXT, likes TEXT DEFAULT '[]', comments TEXT DEFAULT '[]',
-    createdAt TEXT
-  );
-  CREATE TABLE IF NOT EXISTS pila_friend_requests (
-    id TEXT PRIMARY KEY, fromId TEXT, toId TEXT, status TEXT, createdAt TEXT
-  );
-  CREATE TABLE IF NOT EXISTS pila_notifications (
-    id TEXT PRIMARY KEY, userId TEXT, type TEXT, message TEXT,
-    fromName TEXT, read INTEGER DEFAULT 0, createdAt TEXT
-  );
-`)
+await db.execute(`CREATE TABLE IF NOT EXISTS pila_users (id TEXT PRIMARY KEY, name TEXT, email TEXT UNIQUE, studio TEXT, password TEXT, birthday TEXT, points INTEGER DEFAULT 0, totalClasses INTEGER DEFAULT 0, currentStreak INTEGER DEFAULT 0, longestStreak INTEGER DEFAULT 0, lastClassWeek INTEGER, lastClassDate TEXT, earnedMilestones TEXT DEFAULT '[]', friends TEXT DEFAULT '[]', joinedAt TEXT, moodHistory TEXT DEFAULT '[]', classDates TEXT DEFAULT '[]')`)
+await db.execute(`CREATE TABLE IF NOT EXISTS pila_activity (id TEXT PRIMARY KEY, userId TEXT, type TEXT, label TEXT, points INTEGER, createdAt TEXT)`)
+await db.execute(`CREATE TABLE IF NOT EXISTS pila_posts (id TEXT PRIMARY KEY, userId TEXT, userName TEXT, caption TEXT, imageData TEXT, visibility TEXT, classType TEXT, userStats TEXT, likes TEXT DEFAULT '[]', comments TEXT DEFAULT '[]', createdAt TEXT)`)
+await db.execute(`CREATE TABLE IF NOT EXISTS pila_friend_requests (id TEXT PRIMARY KEY, fromId TEXT, toId TEXT, status TEXT, createdAt TEXT)`)
+await db.execute(`CREATE TABLE IF NOT EXISTS pila_notifications (id TEXT PRIMARY KEY, userId TEXT, type TEXT, message TEXT, fromName TEXT, read INTEGER DEFAULT 0, createdAt TEXT)`)
 
 const app = express()
 app.use(cors())
